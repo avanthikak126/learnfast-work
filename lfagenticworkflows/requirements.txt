@@ -1,0 +1,3 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+google-genai

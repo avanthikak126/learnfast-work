@@ -1,0 +1,12 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+# torch is installed separately in the Dockerfile (CPU-only index).
+accelerate
+datasets
+evaluate
+matplotlib
+numpy
+pandas
+pillow
+sentence-transformers
+transformers

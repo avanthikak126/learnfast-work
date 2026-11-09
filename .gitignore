@@ -1,0 +1,26 @@
+# Secrets — never commit these (see thili-src/learnfast/docs/operations/GITHUB_REFERENCE_REPOS.md)
+.env
+*.env
+!.env.example
+keys/
+*.pem
+*.key
+client_secret*.json
+token.json
+service-account*.json
+*-credentials.json
+
+# Student work is committed (work/ IS the submission) — but not its by-products
+work/**/.ipynb_checkpoints/
+work/**/__pycache__/
+**/*.pt
+**/*.pth
+**/*.safetensors
+**/*.ckpt
+data/
+datasets/
+
+# Local noise
+__pycache__/
+.venv/
+.DS_Store

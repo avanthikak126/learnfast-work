@@ -1,0 +1,10 @@
+# The lessons have you write your own package, one lesson at a time.
+#
+# thilimarketbasket is the finished version, installed from GitHub (it is not on PyPI). It is here so the
+# "check it against thilimarketbasket" cells can run. The `train` extra adds transformers, for the
+# tokenizer in lesson 7 and the PyTorch versions of lessons 8 to 11 (mlx is skipped on Linux).
+thilimarketbasket[train] @ git+https://github.com/thili-ai/thilimarketbasket.git
+
+numpy
+pandas
+matplotlib

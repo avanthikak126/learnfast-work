@@ -1,0 +1,36 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+# torch is installed separately in the Dockerfile (CPU-only index).
+chainlit
+chromadb
+cryptography
+datasets
+emotionclassifier
+fastapi
+google-genai
+groq
+gymnasium
+langchain
+langchain-core
+langchain-groq
+langchain-huggingface
+langchain-ollama
+langchain-openai
+langgraph
+matplotlib
+numpy
+optuna
+pandas
+plotly
+pydantic
+pymupdf
+scikit-learn
+seaborn
+sentence-transformers
+streamlit
+transformers
+
+# Learn Fast reference implementations — the libraries you build in these drills.
+git+https://github.com/thili-ai/thilicodex.git
+git+https://github.com/thili-ai/thilimail.git
+git+https://github.com/thili-ai/thilimem.git

@@ -1,0 +1,36 @@
+# Learn Fast — Freight & Logistics workbench.
+#
+#   docker compose -f lflogistics/docker-compose.yml up
+#
+# Then open http://127.0.0.1:8889/?token=learnfast
+# Your notebooks live in work/ at the repo root — the container sees it as /home/learnfast/work.
+#
+# BEFORE you start: install Ollama (https://ollama.com) on your own machine and pull the models:
+#     ollama pull qwen2.5:7b
+#     ollama pull qwen2.5:1.5b
+# Ollama runs on your machine, NOT in this container. The container reaches it at
+# host.docker.internal:11434, which OLLAMA_HOST below already points to — notebooks need no edits.
+# No API keys: everything runs locally.
+services:
+  workbench:
+    # Built locally from ./Dockerfile on first run; nothing is pulled from a registry.
+    build: .
+    container_name: lflogistics-workbench
+    ports:
+      - "8889:8888"
+    volumes:
+      # Only your own work is mounted. The image ships no course notebooks by design.
+      - ../work:/home/learnfast/work
+    # Starts as root ONLY so the entrypoint can rename its user to `learnfast` and hand over the
+    # home directory; the notebook server itself then drops to that unprivileged user.
+    user: root
+    # Docker Desktop (Mac, Windows) defines host.docker.internal already. Linux needs this line.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      NB_USER: learnfast
+      NB_UID: "1000"
+      CHOWN_HOME: "yes"
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-learnfast}
+      OLLAMA_HOST: http://host.docker.internal:11434
+    shm_size: "2gb"

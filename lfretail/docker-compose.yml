@@ -1,0 +1,32 @@
+# Learn Fast — Retail workbench.
+#
+#   docker compose -f lfretail/docker-compose.yml up
+#
+# Then open http://127.0.0.1:8890/?token=learnfast
+# Your notebooks live in work/ at the repo root — the container sees it as /home/learnfast/work.
+#
+# The market-basket internship (lfmarketbasket) trains a language model in lessons 8 to 11 with MLX,
+# which runs on an Apple-silicon Mac's GPU and does not run in this container. Lessons 1 to 7 (the shop,
+# the exact answer, the text form of a basket) run here. For the later lessons, install the reference
+# package on your Mac (`pip install "thilimarketbasket[train]"`), or follow the PyTorch version at the
+# end of each notebook, which runs on CPU here but is slow and has not been run by us.
+# No API keys: everything runs locally.
+services:
+  workbench:
+    # Built locally from ./Dockerfile on first run; nothing is pulled from a registry.
+    build: .
+    container_name: lfretail-workbench
+    ports:
+      - "8890:8888"
+    volumes:
+      # Only your own work is mounted. The image ships no course notebooks by design.
+      - ../work:/home/learnfast/work
+    # Starts as root ONLY so the entrypoint can rename its user to `learnfast` and hand over the
+    # home directory; the notebook server itself then drops to that unprivileged user.
+    user: root
+    environment:
+      NB_USER: learnfast
+      NB_UID: "1000"
+      CHOWN_HOME: "yes"
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-learnfast}
+    shm_size: "2gb"

@@ -1,0 +1,29 @@
+# Learn Fast — AI Tooling workbench.
+#
+#   docker compose -f lftools/docker-compose.yml up
+#
+# Then open http://127.0.0.1:8889/?token=learnfast
+# Your notebooks live in work/ at the repo root — the container sees it as /home/learnfast/work.
+#
+# No API keys: this track runs entirely on your machine.
+services:
+  workbench:
+    # Built locally from ./Dockerfile on first run; nothing is pulled from a registry.
+    build: .
+    container_name: lftools-workbench
+    ports:
+      - "8889:8888"
+      - "8000:8000"
+    volumes:
+      # Only your own work is mounted. The image ships no course notebooks by design.
+      - ../work:/home/learnfast/work
+    # Starts as root ONLY so the entrypoint can rename its user to `learnfast` and hand over the
+    # home directory; the notebook server itself then drops to that unprivileged user.
+    user: root
+    environment:
+      NB_USER: learnfast
+      NB_UID: "1000"
+      CHOWN_HOME: "yes"
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-learnfast}
+    # Docker Desktop defaults to ~2 GB; training will be killed mid-run. Give it 8 GB or more.
+    shm_size: "2gb"

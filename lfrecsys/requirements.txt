@@ -1,0 +1,21 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+# torch is installed separately in the Dockerfile (CPU-only index).
+matplotlib
+numpy
+pandas
+scikit-learn
+scipy
+seaborn
+
+# thilirec, thilitower and thilipipe are the finished versions of what the lessons have you build, installed
+# from GitHub (they are not on PyPI). The "check it against ..." cells use them.
+git+https://github.com/thili-ai/thilirec.git
+# thilipipe imports thilitower but does not declare it, so it is listed explicitly.
+git+https://github.com/thili-ai/thilitower.git
+git+https://github.com/thili-ai/thilipipe.git
+
+# lfwire/lfpipeline run small services and call them over HTTP.
+fastapi
+httpx
+uvicorn

@@ -1,0 +1,11 @@
+# Trimmed to what the lesson notebooks actually import — the minimal base ships none of it.
+mcp
+anthropic
+openai
+uvicorn
+faker
+pytest
+a2a-sdk
+fastapi
+git+https://github.com/thili-ai/thilimcp.git
+git+https://github.com/thili-ai/thilia2a.git

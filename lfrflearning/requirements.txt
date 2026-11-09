@@ -1,0 +1,14 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+# torch is installed separately in the Dockerfile (CPU-only index).
+gymnasium
+imageio
+matplotlib
+numpy
+pandas
+pillow
+pydantic
+pygame
+seaborn
+stable-baselines3
+tqdm

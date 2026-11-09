@@ -1,0 +1,14 @@
+# Trimmed to what the lesson notebooks actually import, plus the scientific stack this track
+# needs (the minimal base ships none of it).
+# torch is installed separately in the Dockerfile (CPU-only index).
+# Learn Fast reference implementations — the libraries you build in these drills.
+fastapi
+git+https://github.com/thili-ai/thilishipagent.git
+httpx
+numpy
+pillow
+pydantic
+scikit-learn
+scipy
+slowapi
+transformers

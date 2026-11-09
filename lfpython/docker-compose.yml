@@ -1,0 +1,29 @@
+# Learn Fast — Python Engineer workbench.
+#
+#   docker compose -f lfpython/docker-compose.yml up
+#
+# Then open http://127.0.0.1:8889/?token=learnfast
+# Your notebooks live in work/ at the repo root — the container sees it as /home/learnfast/work.
+#
+# No API keys: this track runs entirely on your machine.
+services:
+  workbench:
+    # Built locally from ./Dockerfile on first run; nothing is pulled from a registry.
+    build: .
+    container_name: lfpython-workbench
+    ports:
+      - "8889:8888"
+      - "8501:8501"   # the Streamlit app you build in the first drill, opened in your own browser
+      - "8765:8765"   # the API you build in the Metrics API drill, opened in your own browser
+    volumes:
+      # Only your own work is mounted. The image ships no course notebooks by design.
+      - ../work:/home/learnfast/work
+    # Starts as root ONLY so the entrypoint can rename its user to `learnfast` and hand over the
+    # home directory; the notebook server itself then drops to that unprivileged user.
+    user: root
+    environment:
+      NB_USER: learnfast
+      NB_UID: "1000"
+      CHOWN_HOME: "yes"
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-learnfast}
+    shm_size: "2gb"
